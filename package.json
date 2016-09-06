@@ -1,0 +1,97 @@
+{
+    "name": "plant-uml-ext",
+    "displayName": "Plant UML Extension",
+    "description": "Supports preview and export for all supported formats",
+    "version": "0.0.1",
+    "publisher": "self-technologies",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ashinw/vscode-plantuml-ext"
+	},    
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:plantuml.preview",
+        "onCommand:plantuml.exportPNG",
+        "onCommand:plantuml.exportSVG",
+        "onCommand:plantuml.exportEPS",
+        "onCommand:plantuml.exportPDF",
+        "onCommand:plantuml.exportVDX",
+        "onCommand:plantuml.exportXMI",
+        "onCommand:plantuml.exportSCXML",
+        "onCommand:plantuml.exportHTML",
+        "onCommand:plantuml.exportTXT",
+        "onCommand:plantuml.exportUTXT",
+        "onCommand:plantuml.exportLATEX",
+        "onCommand:plantuml.exportLATEX_NOPREAMBLE"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [{
+            "command": "plantuml.preview",
+            "title": "Preview Plant UML text from active editor"
+        },
+        {
+            "command": "plantuml.exportPNG",
+            "title": "Export Plant UML text from active editor as PNG file"
+        },
+        {
+            "command": "plantuml.exportSVG",
+            "title": "Export Plant UML text from active editor as SVG file"
+        },
+        {
+            "command": "plantuml.exportEPS",
+            "title": "Export Plant UML text from active editor as EPS file"
+        },
+        {
+            "command": "plantuml.exportPDF",
+            "title": "Export Plant UML text from active editor as PDF file"
+        },
+        {
+            "command": "plantuml.exportVDX",
+            "title": "Export Plant UML text from active editor as VDX file"
+        },
+        {
+            "command": "plantuml.exportXMI",
+            "title": "Export Plant UML text from active editor as XMI file"
+        },
+        {
+            "command": "plantuml.exportSCXML",
+            "title": "Export Plant UML text from active editor as SCXML file"
+        },
+        {
+            "command": "plantuml.exportHTML",
+            "title": "Export Plant UML text from active editor as HTML file"
+        },
+        {
+            "command": "plantuml.exportTXT",
+            "title": "Export Plant UML text from active editor as TXT file"
+        },
+        {
+            "command": "plantuml.exportUTXT",
+            "title": "Export Plant UML text from active editor as UTXT file"
+        },
+        {
+            "command": "plantuml.exportLATEX",
+            "title": "Export Plant UML text from active editor as LATEX file"
+        },
+        {
+            "command": "plantuml.exportLATEX_NOPREAMBLE",
+            "title": "Export Plant UML text from active editor as LATEX_NOPREAMBLE file"
+        }        
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^1.8.5",
+        "vscode": "^0.11.0"
+    }
+}
