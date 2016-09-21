@@ -1,0 +1,28 @@
+@startuml
+interface PlantUmlCommandLine
+PlantUmlCommandLine -down- [plantuml-vscode-8407.jar]
+
+[plantuml-vscode-8407.jar]
+[vizjs.jar]
+[j2v8_win32_x86_64-4.5.0.jar]
+[batik-rasterizer.jar]
+
+package "plant-uml-ext-0.1.0.vsix" as puml <<extension>> {
+  PlantUmlCommandLine <... [plantuml-ext]
+
+  folder "templates" {
+  }
+
+  folder "bin" {
+  }
+}
+
+bin +--> [plantuml-vscode-8407.jar]
+bin +--> [vizjs.jar]
+bin +--> [j2v8_win32_x86_64-4.5.0.jar]
+bin +--> [batik-rasterizer.jar]
+
+note bottom of [j2v8_win32_x86_64-4.5.0.jar]: Note, this may be either a Win, Linux or Mac binary 
+
+caption Figure Rendering PlantUML text Component Diagram
+@enduml

@@ -1,0 +1,772 @@
+{
+	"General Diagram Start/End": {
+		"prefix": "@startuml enduml",
+		"body": "@startuml\n$0\n@enduml",
+		"description": "Adds the declarative boundaries between which a PlantUML artifact is specified"
+	},
+	"General Diagram Scale": {
+		"prefix": "@scale diagram",
+		"body": [
+			"${'opts=> factor: scale 1.5; width: scale 200 width; height: scale 100 height; dimensions: scale [max] 200x100}",
+			"scale ${1.5}\n$0"
+		],
+		"description": "Changes the zooming extent of the diagram with either a fraction/decimal factor (eg1. scale 2.5) (eg2 scale 2/3) or with a width/height size or with nominated dimensions"
+	},
+	"General Diagram Title": {
+		"prefix": "@title text",
+		"body": [
+			"title",
+			"${multi-line text}$0",
+			"end title\n"
+		],
+		"description": "Adds a title to the top of the diagram with the multi-line text"
+	},
+	"General Diagram Caption": {
+		"prefix": "@caption text",
+		"body": "caption ${Figure x.x description...}\n$0",
+		"description": "Adds a caption under the diagram where figure descriptions can be documented"
+	},
+	"General Diagram Legend": {
+		"prefix": "@legend text",
+		"body": [
+			"${'text-justified options: left|right|center}",			
+			"legend ${left}",
+			"${symbol1 - description}$0",
+			"endlegend\n"
+		],
+		"description": "Adds a legend to the bottom of the diagram with the text left|right|center justified. Use this feature to document the symbols for an overrall context"
+	},
+	"General Diagram Note Independent": {
+		"prefix": "@note independent",
+		"body": "note \"${single-line note}\" as ${noteAlias}\n$0",
+		"description": "Declares a note in the diagram which is subsequently attached to an object using the independent link"
+	},
+	"General Diagram Note Independent Link": {
+		"prefix": "@note independent link",
+		"body": "${objAlias} ${.}. ${noteAlias}\n$0",
+		"description": "Adds a reference link between an object and an independent note in the diagram. Be aware that the length of the line can be forced to change size by adding/removing extra dots"
+	},
+	"General Diagram Note For Object": {
+		"prefix": "@note for object",
+		"body": [
+			"${'position options: left|right|top|bottom}",
+			"note ${left} of ${objAlias}: ${single-line note}\n$0"
+		],
+		"description": "Appends a text note directly left|right|top|bottom of the referenced object in the diagram"
+	},
+	"General Diagram Multi-Line Note For Object": {
+		"prefix": "@note for object multi line",
+		"body": [
+			"${'position options: left|right|top|bottom}",
+			"note ${left} of ${objAlias}",
+			"${multi-line note}$0",
+			"end note\n"
+		],
+		"description": "Appends a text note directly left|right|top|bottom of the referenced object in the diagram"
+	},
+	"General Diagram Activity Header": {
+		"prefix": "@header region text",
+		"body": "header ${last-updated xx/xx/xxxx}\n$0",
+		"description": "Appends a text header to the header region of the diagram. This may be used to provide a date/time stamp of when the diagram was authored/reviewed"
+	},
+	"General Diagram Activity Multi-Line Header": {
+		"prefix": "@header region text multi line",
+		"body": [
+			"header",
+			"${last-updated xx/xx/xxxx}$0",
+			"end header\n"
+		],
+		"description": "Appends a text header to the header region of the diagram. This may be used to provide a date/time stamp of when the diagram was authored/reviewed"
+	},
+	"General Diagram Activity Footer": {
+		"prefix": "@footer region text",
+		"body": "footer ${authored by xxx}\n$0",
+		"description": "Appends a text footer to the footer region of the diagram. This may be used to provide a reference to the author for further clarification"
+	},
+	"General Diagram Activity Multi-Line Footer": {
+		"prefix": "@footer region text multi line",
+		"body": [
+			"footer",
+			"${authored by xxx}$0",
+			"end footer\n"
+		],
+		"description": "Appends a text footer to the footer region of the diagram. This may be used to provide a reference to the author for further clarification"
+	},
+	"General Diagram Newpage": {
+		"prefix": "@newpage separator",
+		"body": "newpage ${title text}\n$0",
+		"description": "Adds a new page separator with an optional title to split the diagram into sections for embedding into word processing documents"
+	},
+	"Sequence Diagram Object Sterotype": {
+		"prefix": "#actor|participant|boundary|control|database|entity declaration",
+		"body": [
+			"${'sterotyped-object options: actor|participant|boundary|control|database|entity}",
+			"${actor} ${alias} ${${as} \"${longName}\"} ${<<(${P},${#ADD1B2}) ${stereotype}>>}\n$0"
+		], 
+		"description": "Adds a type of object type with an alias and/or longName to the sequence diagram. You may nominate any of the following primary sterotypes: boundary|control|database|entity to better express the overrall intent of the object. Further stereotyping is offered via letter stereotyping, and label stereotyping"
+	},
+	"Sequence Diagram Autonumber messages": {
+		"prefix": "#auto message numbering",
+		"body": "autonumber ${nStartFrom} ${nStepBy} \"${###}\"\n$0",
+		"description": "Displays an auto incrementing numbered sequence in front of the message. You can optionally specify a start from number, step by amount, and a format string.\nNote, if unspecified the defaults are 1 & 1 respectively. Format strings can include HTML with 0 or # representing the number of digits in the expression (eg. autonumber 1 10 \"<b>(##)</b>\"). Note, you may also enter either a value of stop or resume for nStartFrom"
+	},
+	"Sequence Diagram Message": {
+		"prefix": "#message obj1 -> obj2",
+		"body": [
+			"${'Alt=> async msg: A->>B or A-\\\\B; lost msg: A->o]; found msg: Ao<-]}",
+			"${objAlias1} ${->} ${objAlias2}: ${message}",
+			"${objAlias1} <-- ${objAlias2}: ${returnVal}$0"
+		],
+		"description": [
+			"Adds a message between two objects (ie. obj1 sends message to obj2 with return result)\nArrow head options:\n  A->B   : A sends synchronous message to B\n  A->>B  : A sends asynchronous message to B. You can also use \\\\ for greater effect!\n  A<--B : B sends return to A [with optional result as message label]\n  A->o]  : A sends lost message\n  Ao<-] : A receives a found message"
+		]
+	},
+	"Sequence Diagram Message Incoming": {
+		"prefix": "#message incoming ? -> obj",
+		"body": "[-> ${objAlias}: ${message}\n$0",
+		"description": "Adds an incoming message from an unidentified source to the nominated object"
+	},
+	"Sequence Diagram Message Outgoing": {
+		"prefix": "#message outgoing obj -> ?",
+		"body": "${objAlias} ->] : ${message}\n$0",
+		"description": "Adds an outgoing message from the nominated object to an unidentified source"
+	},
+	"Sequence Diagram Hide Footbox": {
+		"prefix": "#hide footbox",
+		"body": "hide footbox\n$0",
+		"description": "Removes the lower duplicate graphic representation at the bottom of each object's lifeline"
+	},
+	"Sequence Diagram Alternative": {
+		"prefix": "#alternative or if else conditional block",
+		"body": [
+			"alt ${cond1}",
+			"\t$0",
+			"else ${cond2...}",
+			"\t",
+			"end\n"
+		],
+		"description": "Adds an alternative or conditional execution (ie. if (cond1) ... elseif (cond2) ... else ... end) to the flow of control to govern the enclosing content. You may add additional 'else' conditions blocks as required"
+	},
+	"Sequence Diagram Option": {
+		"prefix": "#option or if conditional block",
+		"body": [
+			"opt ${cond}",
+			"\t$0",
+			"end\n"
+		],
+		"description": "Adds an opt (ie. if (cond) then ... endif) to the flow of control block to govern the enclosing content"
+	},
+	"Sequence Diagram Loop": {
+		"prefix": "#loop block",
+		"body": [
+			"loop ${cond}",
+			"\t$0",
+			"end\n"
+		],
+		"description": "Adds a loop (ie. while (cnd) ... endwhile) to the flow of control block to govern the enclosing content"
+	},
+	"Sequence Diagram Parallel": {
+		"prefix": "#parallel execution fragments",
+		"body": [
+			"par ${threadName1}",
+			"\t$0",
+			"else ${threadName2...}",
+			"\t",
+			"end\n"
+		],
+		"description": "Adds parallel execution fragments (ie. Thread.start(threadName1)) to the enclosing content. You may add additional 'else' thread blocks as required"
+	},
+	"Sequence Diagram break": {
+		"prefix": "#break or exception handling block",
+		"body": [
+			"break ${catchCond1}",
+			"\t$0",
+			"else ${catchCond2...}",
+			"\t",
+			"else finally",
+			"\t",
+			"end\n"
+		],
+		"description": "Adds an exception/error handling block that gets invoked should any of the preceding tried messages throw any errors. Consider each sub-section as a catch block for handling a particular type of exception/condition with the last section representing the finally. You may add additional 'else' catch condition blocks or remove as required"
+	},
+	"Sequence Diagram Critical": {
+		"prefix": "#critical flow section",
+		"body": [
+			"critical ${cond}",
+			"\t$0",
+			"end\n"
+		],
+		"description": "Adds a critical flow section to the enclosing content"
+	},
+	"Sequence Diagram Group": {
+		"prefix": "#group block",
+		"body": [
+			"group ${basis}",
+			"\t$0",
+			"end\n"
+		],
+		"description": "Adds a group around a set of enclosed messages to highlight a type of processing or concern. You may use this fragment to model the other modeling elements that PlantUML currently does not support (eg. group ignore {logging, getters, setters} ...)"
+	},
+	"Sequence Diagram Box": {
+		"prefix": "#box to group objects",
+		"body": [
+			"box \"${caption}\"",
+			"\tparticipant ${alias1}$0",
+			"${\tparticipant ${alias2}}",
+			"end box\n"
+		],
+		"description": "Adds a bounding box around the nominated participant declarations"
+	},
+	"Sequence Diagram Message Note": {
+		"prefix": "#note on message",
+		"body": [
+			"${'position options: left|right}",
+			"note ${left} : ${single-line note}\n$0"
+		],
+		"description": "Appends a text note directly left|right of the preceding message"
+	},
+	"Sequence Diagram Message Multi-Line Note": {
+		"prefix": "#note on message multi line",
+		"body": [
+			"${'position options: left|right}",
+			"note ${left}",
+			"${multi-line note}$0",
+			"end note\n"
+		],
+		"description": "Appends a text note directly left|right of the preceding message"
+	},
+	"Sequence Diagram Object Note": {
+		"prefix": "#note over objects",
+		"body": "note over ${commaSepAliases} : ${single-line note}\n$0",
+		"description": "Appends a text note directly over the nominated aliases (eg. note over A, B: my note). Consider using notes for providing commentary, use references for more formal flow of control instructions"
+	},
+	"Sequence Diagram Object Multi-Line Note": {
+		"prefix": "#note over objects multi line",
+		"body": [
+			"note over ${commaSepAliases}",
+			"${multi-line note}$0",
+			"end note\n"
+		],
+		"description": "Appends a text note directly over the nominated aliases (eg. note over A, B \n my note\nend note). Consider using notes for providing commentary, use references for more formal flow of control instructions"
+	},
+	"Sequence Diagram Divider": {
+		"prefix": "#divider",
+		"body": "== ${section} ==\n$0",
+		"description": "Creates a section divider immediately after the preceding message [if any]. Dividers are helpful when a sequence diagram has become large and reviewers can attend to specific messaging by section"
+	},
+	"Sequence Diagram Reference": {
+		"prefix": "#reference over objects",
+		"body": [
+			"ref over ${commaSepAliases}",
+			"${multi-line note}$0",
+			"end ref\n"
+		],
+		"description": "Appends a text reference directly over the nominated aliases (eg. ref over A, B \n my note\nend ref).  Consider using notes for providing commentary, use references for more formal flow of control instructions"
+	},
+	"Sequence Diagram Delay": {
+		"prefix": "#delay before next message",
+		"body": "... ${elapsed time}...\n$0",
+		"description": "Creates a delay marked with the elapsed time between the previous and next message"
+	},
+	"Sequence Diagram Spacing": {
+		"prefix": "#spacing",
+		"body": "||${nPixels}||\n$0",
+		"description": "Creates an additional spacing between message above and below by the specified pixel size (eg. ||20||)"
+	},
+	"Sequence Diagram Lifeline Create": {
+		"prefix": "#create lifeline",
+		"body": "create ${objAlias}\n$0",
+		"description": "Shows the timed creation of the object reference for all subsequent message calls to that object"
+	},
+	"Sequence Diagram Lifeline Destroy": {
+		"prefix": "#destroy lifeline",
+		"body": "destroy ${objAlias}\n$0",
+		"description": "Shows the timed destruction of the object reference"
+	},
+	"Sequence Diagram Lifeline Activate": {
+		"prefix": "#activate lifeline",
+		"body": "activate ${objAlias}\n$0",
+		"description": "Shows the timed active execution context for all subsequent message calls to the nominated object"
+	},
+	"Sequence Diagram Lifeline Deactivate": {
+		"prefix": "#deactivate lifeline",
+		"body": "deactivate ${objAlias}\n$0",
+		"description": "Shows the timed deactive execution context for all subsequent message calls to the nominated object"
+	},
+	"Use-Case Diagram Use-case": {
+		"prefix": "%usecase",
+		"body": "usecase ${alias} ${${as} \"${longName}\"} ${<<stereotype>>}\n$0",
+		"description": "Adds a use-case declaration. It is typical for use-cases to have meaningful human readable names which are not in camel case or use other programmatic conventions. Therefore, consider using aliases with long names such that the aliases can be referenced in all subsequent associations"
+	},
+	"Use-Case Diagram Actor": {
+		"prefix": "%actor",
+		"body": "actor ${alias} ${${as} \"${longName}\"} ${<<stereotype>>}\n$0",
+		"description": "Adds an actor declaration. It is typical for actors to have meaningful human readable role names which are not in camel case or use other programmatic conventions. Therefore, consider using aliases with long names such that the aliases can be referenced in all subsequent associations"
+	},
+	"Use-Case Diagram Association": {
+		"prefix": "%association relationship",
+		"body": "${actorAlias} ${-}-> ${usecaseAlias} : ${label}\n$0",
+		"description": "Adds an association between an actor and a use-case (ie. actor exercises use-case) with an optional label to define the relationship. Note, the length of the line can be forced to change size by adding/removing extra dashes"
+	},
+	"Use-Case Diagram Association Inline": {
+		"prefix": "%association with actor and usecase declared inline",
+		"body": ":${actor}: ${-}-> (${usecase}) : ${label}\n$0",
+		"description": "Adds an inline (ie. definitions are inlined) association between an actor and a use-case (ie. actor exercises use-case) with an optional label to define the relationship. Note, the length of the line can be forced to change size by adding/removing extra dashes"
+	},
+	"Use-Case Diagram Extension Relationship": {
+		"prefix": "%extension relationship",
+		"body": "${usecase1Alias} <.${.} ${usecase2Alias} : ${label}\n$0",
+		"description": "Adds an extension between two use-cases with an optional label to define an extends/includes relationship. Note, the length of the line can be forced to change size by adding/removing extra dots"
+	},
+	"Use-Case Diagram Extension Relationship Inline": {
+		"prefix": "%extension relationship between usecases declared inline",
+		"body": "(${usecase1}) <.${.} (${usecase2}) : ${label}\n$0",
+		"description": "Adds an inline (ie. definitions are inlined) extension between two use-cases with an optional label to define an extends/includes relationship. Note, the length of the line can be forced to change size by adding/removing extra dots"
+	},
+	"Use-Case Diagram Generalisation Relationship": {
+		"prefix": "%generalisation relationship",
+		"body": "${actor1Alias} <|-${-} ${actor2Alias} : ${label}\n$0",
+		"description": "Adds a generalisation between two actors with an optional label to define the relationship. Note, the length of the line can be forced to change size by adding/removing extra dots"
+	},
+	"Use-Case Diagram Generalisation Relationship Inline": {
+		"prefix": "%generalisation relationship between two actors declared inline",
+		"body": ":${actor1}: <|-${-} :${actor2}: : ${label}\n$0",
+		"description": "Adds an inline (ie. definitions are inlined) generalisation between two actors with an optional label to define the relationship. Note, the length of the line can be forced to change size by adding/removing extra dots"
+	},
+	"Use-Case Diagram Direction": {
+		"prefix": "%left to right direction",
+		"body": "left to right direction\n$0",
+		"description": "Force the use-case diagram to render objects from left to right rather than the default top to bottom direction"
+	},
+	"Use-Case Diagram Rectangle": {
+		"prefix": "%rectangle or system to enclose use-cases",
+		"body": [
+			"rectangle \"${caption}\" {",
+			"\t$0",
+			"}\n"
+		],
+		"description": "Adds a bounding box around the nominated objects. This feature can be effectively used to document the use-cases which are in or out of scope for a project, or that are part of different systems"
+	},
+	"Class Diagram Aggregation Relationship": {
+		"prefix": "$aggregation relationship",
+		"body": "${classAlias} \"${multiplicityRole1}\" o-${-}${>} \"${multiplicityRole2}\" ${typeAlias} ${:} ${label} ${<<stereotype>>} ${>}\n$0",
+		"description": "Creates an aggregation association between a class and another type. The relationship may include multiplicities, role names, navigability indicators, label and/or stereotypes. Note, the length of the line can be forced to change size by adding/removing extra dashes"
+	},
+	"Class Diagram Composition Relationship": {
+		"prefix": "$composition relationship",
+		"body": "${classAlias} \"${multiplicityRole1}\" *-${-}${>} \"${multiplicityRole2}\" ${typeAlias} ${:} ${label} ${<<stereotype>>} ${>}\n$0",
+		"description": "Creates an composition association between a class and another type. The relationship may include multiplicities, role names, navigability indicators, label and/or stereotypes. Note, the length of the line can be forced to change size by adding/removing extra dashes"
+	},
+	"Class Diagram Association Relationship": {
+		"prefix": "$association relationship",
+		"body": "${classAlias} \"${multiplicityRole1}\" -${-}${>} \"${multiplicityRole2}\" ${typeAlias} ${:} ${label} ${<<stereotype>>} ${>}\n$0",
+		"description": "Creates an association between two types. Be aware types could be classes, interfaces and/or enumerations. The relationship may include multiplicities, role names, navigability indicators, label and/or stereotypes. Note, the following arrow head rules:\n- 'no arrow head' implies an unspecified navigability from class to type\n - '>' implies that class navigates the features of type\n- 'x' implies that class cannot navigate into the features of type. Furthermore, the length of the line can be forced to change size by adding/removing extra dashes"
+	},
+	"Class Diagram Association Class Relationship": {
+		"prefix": "$association class relationship",
+		"body": "(${type1}, ${type2}) ${.}. ${assocClass} ${:} ${label} ${<<stereotype>>}\n$0",
+		"description": "Creates an associated class relationship between two types. The resulting class represents a marriage between type1 and type2, and is may be implemented as attributes to each respective class in the assocClass"
+	},
+	"Class Diagram Dependency Relationship": {
+		"prefix": "$dependency relationship",
+		"body": "${ref1} ${.}.> ${ref2} ${:} ${label} ${<<stereotype>>}\n$0",
+		"description": "Creates a dependency between two references. The relationship may include a label and/or stereotypes"
+	},
+	"Class Diagram Generalisation Relationship": {
+		"prefix": "$generalisation relationship",
+		"body": "${class1} <|-${-} ${class2} ${:} ${label} ${<<stereotype>>}\n$0",
+		"description": "Creates a generalisation between two classes such that class2 extends the capabilities of class1. The relationship may include a label and/or stereotypes"
+	},
+	"Class Diagram Realisation Relationship": {
+		"prefix": "$realisation relationship",
+		"body": "${interfaceAlias} <|.${.} ${classAlias} ${:} ${label} ${<<stereotype>>}\n$0",
+		"description": "Creates a realisation of an interface such that class implements the specification of the interface. The relationship may include a label and/or stereotypes"
+	},
+	"Class Diagram Realisation Lollipop Relationship": {
+		"prefix": "$realisation lollipop relationship",
+		"body": "${interfaceAlias} ()-${-} ${classAlias} ${:} ${label} ${<<stereotype>>}\n$0",
+		"description": "Creates a realisation of an interface such that class implements the specification of the interface. The relationship may include a label and/or stereotypes"
+	},
+	"Class Diagram Relationship Note": {
+		"prefix": "$note on relationship",
+		"body": [
+			"${'position options: left|right|top|bottom}",
+			"note ${left} on link ${#Khaki} : ${single-line note}\n$0"	
+		],
+		"description": "Appends a text note directly left|right|top|bottom of the previously defined relationship. Use the color name guide to identify colors or use #hexCodes"
+	},
+	"Class Diagram Link Multi-Line Note": {
+		"prefix": "$note on relationship multi line",
+		"body": [
+			"${'position options: left|right|top|bottom}",
+			"note ${left} on link ${#Khaki}",
+			"${multi-line note}$0",
+			"end note\n"
+		],
+		"description": "Appends a text note directly left|right|top|bottom of the previously defined relationship. Use the color name guide to identify colors or use #hexCodes"
+	},
+	"Class Diagram Class Declaration With Stereotype": {
+		"prefix": "$class declaration with stereotype",
+		"body": "class ${alias} ${${as} \"${longName}\"} ${<<(${X},${#ADD1B2}) ${stereotype}>>}\n$0",
+		"description": "Adds a class with a stereotype and an optional letter icon with color to the class (eg. class Stream <<(O,#ADD1B2) io>>). Class declarations are useful when you are either: 1. modeling the domain, 2. the class names are long or you want them more human readable, or 3. there are no implementation details requiring specification"
+	},
+	"Class Diagram Class Definition": {
+		"prefix": "$class definition",
+		"body": [
+			"${abstract }class ${alias} ${<T>} {",
+			"\t$0+{static} int PUBLIC_CLASS_VARIABLE",
+			"\t-string privateVariable",
+			"\t~void packagePrivateMethod()",
+			"\t#{abstract} char protectedMethod(int param)",
+			"}\n"
+		],
+		"description": "Adds a class definition type to the class diagram. You can add instance variable/methods, abstract methods, class variables/methods and also specify member access and abstract modifiers. Note, you may also just choose to add free form text between the braces without any member signatures at all. In such cases you can use .. or -- or == as separators within the compartment. Note, class definition and declaration are not mutually exclusive; they can both be used together very effectively to model a rich and optimised diagram via aliasing"
+	},
+	"Class Diagram Interface": {
+		"prefix": "$interface definition",
+		"body": [
+			"interface ${alias} ${${as} \"${longName}\"} ${<<stereotype>>} {",
+			"\t$0",
+			"}\n"
+		],
+		"description": "Adds an interface type definition to the class diagram. You can typically add constants and method specification"
+	},
+	"Class Diagram Enumeration": {
+		"prefix": "$enumeration definition",
+		"body": [
+			"enum ${alias} ${${as} \"${longName}\"} ${<<stereotype>>} {",
+			"\t$0",
+			"}\n"
+		],
+		"description": "Adds an enumeration definition to the class diagram"
+	},
+	"Class Diagram Annotation": {
+		"prefix": "$annotation declaration",
+		"body": "annotation ${alias} ${<<stereotype>>}\n$0",
+		"description": "Adds an annotation definition to the class diagram"
+	},
+	"Class Diagram Package": {
+		"prefix": "$package definition",
+		"body": [
+			"package \"${longName}\" ${${as} ${alias}} ${<<stereotype>>} {",
+			"\t$0",
+			"}\n"
+		],
+		"description": "Adds a package definition to the class diagram"
+	},
+	"Class Diagram Object Instance": {
+		"prefix": "$object definition",
+		"body": [
+			"object \"${name}\" ${${as} ${alias}} ${<<stereotype>>} {",
+			"\t$0",
+			"}\n"
+		],
+		"description": "!Note, an object interaction diagram (like a package diagram) is essentially a restricted class diagram. Therefore, to create an object diagram use objects (ie. class instances) and classes with associations to model the intended dynamic behavior.\n\nThis snippet adds an object to the diagram to represent the current state of nominated object. \n\nEnter Key=Value pairs in the compartment"
+	},	
+	"Class Diagram Hide Features": {
+		"prefix": "$hide features",
+		"body": [
+			"${'hide [<<stereotype>> or alias] [empty members,members,empty attributes,attributes,empty methods,methods,circle,stereotype,class,interface,enum]}",
+			"hide ${empty members}"
+		],
+		"description": "Hide matching stereotype, alias, members or features that match the nominated option. This feature is useful when you dont want to distract the reviewer with various implementation details in the model without the need for re-modeling. Consider 'Detail.pu' as a PlantUML diagram that includes a fully detailed model with all relationship and member signatures. Rather than reproduce the same model, you could use the !include feature and then hide various model features"
+	},
+	"Class Diagram Show": {
+		"prefix": "$show features",
+		"body": [
+			"${'show [<<stereotype>> or alias] [empty members,members,empty attributes,attributes,empty methods,methods,circle,stereotype,class,interface,enum]}",
+			"show ${empty members}"
+		],
+		"description": "show matching stereotype, alias, members or features that match the nominated option. This feature is used in conjuction with the hidden feature. Consider using the hide for a broad brush approach detail remover, then apply show to expose those interesting details for this diagram."
+	},
+	"Activity Diagram Start": {
+		"prefix": "&start activity",
+		"body":"start\n$0",
+		"description": "Adds the starting/initial step from which all paths start from in the activity diagram"
+	},
+	"Activity Diagram Stop": {
+		"prefix": "&stop activity",
+		"body":"stop\n$0",
+		"description": "Adds the termination step from which all (or a) path(s) should lead in the activity diagram"
+	},
+	"Activity Diagram Activity": {
+		"prefix": "&activity",
+		"body":":${multi-line name};\n$0",
+		"description": "Adds an activity that follows on from the previous control statement.\n Note, to use SDL sterotyped activities replace the terminating ';' with one of the following characters: |,<,>,/,],}"
+	},
+	"Activity Diagram If Condition": {
+		"prefix": "&if elseif else condition",
+		"body": [
+			"if (${cond1}?) then (${val1})",
+			"\t$0",
+			"elseif (${cond2}?) then (${val2})",
+			"\t",
+			"else (${val3})",
+			"\t",
+			"endif"
+		],
+		"description": "Adds an if-then-elseif-else condition to the activity diagram. Add/remove the elseif/else blocks as required"
+	},
+	"Activity Diagram Repeat": {
+		"prefix": "&repeat loop",
+		"body": [
+			"repeat",
+			"\t$0",
+			"repeat while (${cond}?) is (${val})"
+		],
+		"description": "Adds a repeat while loop to the activity diagram"
+	},
+	"Activity Diagram While": {
+		"prefix": "&while loop",
+		"body": [
+			"while (${cond}?) is (not ${val})",
+			"\t$0",
+			"endwhile (${val}) "
+		],
+		"description": "Adds a while loop to the activity diagram"
+	},
+	"Activity Diagram Fork": {
+		"prefix": "&fork concurrent activities",
+		"body": [
+			"fork",
+			"\t$0",
+			"fork again",
+			"\t",
+			"end fork"
+		],
+		"description": "Adds a fork segment to represent parallel processing within the activity diagram"
+	},
+	"Activity Diagram Activity Note": {
+		"prefix": "&note on activity",
+		"body": [
+			"${'position options: left|right}",
+			"${floating} note ${left} : ${single-line note}\n$0"
+		],
+		"description": "Appends a text note directly left|right of the preceding activity"
+	},
+	"Activity Diagram Activity Multi-Line Note": {
+		"prefix": "&note on activity multi line",
+		"body": [
+			"${'position options: left|right}",
+			"${floating }note ${left}",
+			"${multi-line note}$0",
+			"end note\n"
+		],
+		"description": "Appends a text note directly left|right of the preceding activity"
+	},
+	"Activity Diagram Partition": {
+		"prefix": "&partition grouping",
+		"body": [
+			"partition ${name} {",
+			"\t$0",
+			"}\n"
+		],
+		"description": "Add a group that encloses a set of related activities within the activity diagram"
+	},
+	"Activity Diagram Swimlane": {
+		"prefix": "&swimlane grouping",
+		"body": "${|#AntiqueWhite}|${laneName}|\n$0",
+		"description": "Creates a new vertical lane for all subsequent activities to be enclosed in. Use the color names guide to identify colors or use #hexCodes"
+	},
+	"Activity Diagram Detach": {
+		"prefix": "&detach activity",
+		"body": "detach\n$0",
+		"description": "Causes an abrupt end immediately following the preceding activity"
+	},
+	"Component Diagram Component": {
+		"prefix": "*component definition",
+		"body": [
+			"component \"${name}\" ${${as} ${alias}} ${<<stereotype>>} {",
+			"\t$0",
+			"}\n"
+		],
+		"description": "Adds a component to the component diagram. Components may be binary executables or even configuration files."
+	},
+	"Component Diagram Interface": {
+		"prefix": "*interface definition",
+		"body": "interface \"${name}\" ${${as} ${alias}}",
+		"description": "Adds an interface to the component diagram"
+	},
+	"Component Diagram Realisation": {
+		"prefix": "*realisation relationship",
+		"body": "${interfaceAlias} -${-} ${componentAlias} ${:} ${label} ${<<stereotype>>}\n$0",
+		"description": "Creates a realisation of an interface such that the component implements the specification of the interface. The relationship may include a label and/or stereotypes. Note, the length of the line can be forced to change size by adding/removing extra dashes"
+	},
+	"Component Diagram Dependency": {
+		"prefix": "*dependency relationship",
+		"body": "${compOrIntf1} <.${.} ${compOrIntf2} ${:} ${label} ${<<stereotype>>}\n$0",
+		"description": "Creates a dependency such that the component/interface depends on the other component/interface. The relationship may include a label and/or stereotypes. Note, the length of the line can be forced to change size by adding/removing extra dots"
+	},
+	"Component Diagram Package": {
+		"prefix": "*package definition",
+		"body": [
+			"${'package-type options: package|node|folder|frame|cloud|database}",
+			"${package} \"${name}\" ${${as} ${alias}} ${<<stereotype>>} {",
+			"\t$0",
+			"}\n"
+		],
+		"description": "Adds a package to a component diagram that components and/or interfaces physically reside in or bundles together"
+	},
+	"Component Diagram Link Note": {
+		"prefix": "*note on relationship",
+		"body": [
+			"${'position options: left|right|top|bottom}",
+			"note ${left} on link ${#Khaki} : ${single-line note}\n$0"
+		], 
+		"description": "Appends a text note directly left|right|top|bottom of the preceding component relationship"
+	},
+	"Component Diagram Link Multi-Line Note": {
+		"prefix": "*note on relationship multi line",
+		"body": [
+			"${'position options: left|right|top|bottom}",			
+			"note ${left} on link ${#Khaki}",
+			"${multi-line note}$0",
+			"end note\n"
+		],
+		"description": "Appends a text note directly left|right|top|bottom of the preceding component relationship"
+	},
+	"State Transition Diagram Start/Stop": {
+		"prefix": "^start -> state -> stop template",
+		"body": [
+			"[*] ${-}-> ${stateAlias} : ${transOrCond1} ${<<stereotype1>>}",
+			"${stateAlias} -> [*] : ${transOrCond2} ${<<stereotype2>>}$0\n"
+		],
+		"description": "Adds a basic Start-> State -> Stop template sequence to the current context within the State Trasition Diagram. This can also be used for sub-states. Note, the length of the line can be forced to change size by adding/removing extra dashes"
+	},
+	"State Transition Diagram State": {
+		"prefix": "^state definition",
+		"body": [
+			"state \"${name}\" ${${as} ${alias}} ${<<stereotype>>} {",
+			"\t$0",
+			"}\n"
+		],
+		"description": "Adds a state definition to the current context. Sub-states or concurrent states are defined between the {...} brackets. Note, to specify state data, use the state value details snippet."
+	},
+	"State Transition Diagram Transition": {
+		"prefix": "^transition between states",
+		"body": "${stateAlias1} ${-}-> ${stateAlias2} : ${messageOrCond2} ${<<stereotype>>}$0\n ",
+		"description": "Adds a transition between two states. The transition may optionally declare a message and/or condition, and/or a transition stereotype. Note, the length of the line can be forced to change size by adding/removing extra dashes"
+	},
+	"State Transition Diagram Concurrency": {
+		"prefix": "^concurrency within a state",
+		"body": "--",
+		"description": "Adds a concurrency separator within the current state context such that an object can be modeled to be active in multiple sub-states at the same time"
+	},
+	"State Transition Diagram State Value Info": {
+		"prefix": "^state value details",
+		"body": "state ${alias}: ${Key=Value}",
+		"description": "Adds a current key/value pair to the first compartment of the state, such that it is differentiable from other states in the hosting container"
+	},
+	"UI Diagram Definition": {
+		"prefix": "!start UI diagram",
+		"body": [
+			"salt",
+			"{\t$0",
+			"}\n"
+		],
+		"description": "Adds the declarative boundaries between which a UI diagram is specified within a PlantUML artifact. Note, all subsequent components must be added between the braces"
+	},
+	"UI Diagram Label": {
+		"prefix": "!label",
+		"body": "${label}\n$0",
+		"description": "Adds a label component to the current view context"
+	},
+	"UI Diagram Radio Button": {
+		"prefix": "!radio button",
+		"body": "(${X})${button label}\n$0",
+		"description": "Adds a radio button component to the current view context. Place an uppercase X between the parenthesis to indicate selection"
+	},
+	"UI Diagram Checkbox Button": {
+		"prefix": "!checkbox button",
+		"body": "[${X}]${button label}\n$0",
+		"description": "Adds a checkbox button component to the current view context. Place an uppercase X between the parenthesis to indicate selection"
+	},
+	"UI Diagram Textbox Edit": {
+		"prefix": "!textbox edit",
+		"body": "\"${edit-text placeholder}\"\n$0",
+		"description": "Adds a single line edit textbox component to the current view context"
+	},
+	"UI Diagram Combobox": {
+		"prefix": "!combobox or select box",
+		"body": "^${drop down placeholder}^\n$0",
+		"description": "Adds a combobox component to the current view context. Combo boxes or select boxes typically offer the user 5-10 options to select from. Note, this feature only lets you define the first option"
+	},
+	"UI Diagram Grid External Outline": {
+		"prefix": "!grid external outline",
+		"body": [
+			"${'lines=> external: +; vert/horiz: #; horiz: -; vert: !}",
+			"{${+}\n\t$0\n}"
+		],
+		"description": "Adds a grid with an outline type to specify how the margins around each cell are outlined to the current view context"
+	},
+	"UI Diagram Grid Row": {
+		"prefix": "!grid row columns",
+		"body": "${component1} | ${component2} ${|} ${component3} \n$0",
+		"description": "Adds a grid row layout to organise component horizontally to the current view context. You may add/remove columns to the row using the '|' delimiter"
+	},
+	"UI Diagram Separator Dotted": {
+		"prefix": "!seperator line",
+		"body": [
+			"${'line=> dotted: ..; sold: --; double: ==}",
+			"${..}\n\n$0"
+		],
+		"description": "Adds a line as a separator to appear between the component above and the component below the line in the current view context. You may use dotted, solid or double lines as the separator"
+	},
+	"UI Diagram Treeview": {
+		"prefix": "!treeview",
+		"body": [
+			"{T",
+			"\t+Home folder$0",
+			"\t++Document",
+			"\t+++Scanned In Document",
+			"\t++Downloads",
+			"\t++Pictures",
+			"}\n"
+		],
+		"description": "Adds a treeview component to the current view context. Note, each node in the tree is represented as a individual line with leading '+' symbols. The number of '+' preceding each label defines its indentation/level"
+	},
+	"UI Diagram Tabbar Horizontal": {
+		"prefix": "!tab horizontal",
+		"body": "{/ ${Playlists} | ${Artists} | ${Songs} | ${Albums}}\n$0",
+		"description": "Adds a horizontal tab bar component to the current view context. Note, you may use basic HTML in this region. Furthermore, you may add additional tabs using the '|' separator"
+	},
+	"UI Diagram Tabbar Vertical Left": {
+		"prefix": "!tab vertical left",
+		"body": [
+			"{/\t${Playlists}",
+			"\t${Artists}",
+			"\t${Songs}",
+			"\t${Albums}",
+			"} | {",
+			"\t$0",
+			"}"
+		],
+		"description": "Adds a vertical tab bar component to the current view context. You may use basic HTML in this region in the tab names. The view for the nominated tab is modeled between the lower braces brackets"
+	},
+	"UI Diagram Menubar": {
+		"prefix": "!main menu",
+		"body": "{* ${File} | ${Edit} | ${Help}$0\n}",
+		"description": "Adds a menu bar component to the current view context. If you indend to model an opened main menu item them use the main menu opened snippet instead"
+	},
+	"UI Diagram Menu Opened": {
+		"prefix": "!main menu opened",
+		"body": [
+			"{* ${File} | ${Edit} | ${Help}",
+			"\t${File} | ${New} | ${Open ...} _ | ${Exit} $0",
+			"}"
+		],
+		"description": "Adds an expanded main menu bar item component to the current view context"
+	},
+	"UI Diagram Table": {
+		"prefix": "!table",
+		"body": [
+			"{#",
+			"\t=$0 Y-val |=X-val|=Gradient|=Y intercept",
+			"\t 5 |1|2|3",
+			"\t 7 |2|2|3",
+			"\t Solve these|*|*|*",
+			"}\n"
+		],
+		"description": "Adds a table component to the current view context. Use the '.' character to signify an empty cell. Use the '*' character to specify a cell spanning multiple columns"
+	}
+}

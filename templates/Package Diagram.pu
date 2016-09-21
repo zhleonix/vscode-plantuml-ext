@@ -1,0 +1,39 @@
+@startuml
+
+package vscode {
+}
+
+package nodejs {
+}
+
+package path {
+}
+
+package fs {
+}
+
+package util {
+}
+
+package child_process {
+}
+
+fs <--+ nodejs 
+path <--+ nodejs
+util <--+ nodejs 
+child_process <--+ nodejs 
+
+package "au.com.self.ide.vscode.ext" as extbase {
+}
+
+package "au.com.self.ide.vscode.ext.plantuml" as puml {
+}
+
+puml ...> fs
+puml ...> path
+puml ...> util
+puml ...> child_process
+puml ..> extbase
+puml ..> vscode
+
+@enduml

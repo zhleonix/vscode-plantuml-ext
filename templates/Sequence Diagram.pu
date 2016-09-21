@@ -1,0 +1,28 @@
+@startuml
+skinparam style strictuml
+[-> workspace : onDidChangeTextDocument
+activate workspace
+workspace -> extension : "=>"
+activate extension
+
+extension -> extension : currTime = new Date().getTime()
+activate extension
+
+alt (currTime < this._lastRefreshTime + 500)
+  extension -> extension : clearTimeout()
+  activate extension
+end
+
+create provider
+extension -->> provider : setTimeout(update(), 500) 
+activate provider
+extension --> workspace : done
+deactivate extension
+[<-- workspace : done
+deactivate workspace
+
+create renderer
+provider -->> renderer: render() <<async>>
+activate renderer
+renderer --> provider: setText(SVG)
+@enduml

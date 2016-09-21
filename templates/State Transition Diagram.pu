@@ -1,0 +1,28 @@
+@startuml
+[*] -> Activating: [on vscode startup]
+Activating: check setup
+Activating: register Content Provider 
+Activating: register Editor Listerners
+
+Activating -> Activating: activate [on initial vscode \n command request]
+
+Activating --> Active
+Active --> [*]: deactivate [on vscode shutdown]
+
+Active -left-> Previewing: [on preview request]
+Active -left-> Previewing: [on model update && LivePreviewOn]
+Previewing -> Active: [on end]
+
+Active -> Exporting: [on export request]
+Exporting -> Active: [on end]
+
+Active --> LoadingTemplate: [on template load request]
+LoadingTemplate --> Active: [on end]
+
+state Active  {
+  [*] --> LivePreviewOn 
+  LivePreviewOn --> LivePreviewOff : toggleOff
+  LivePreviewOff --> LivePreviewOn : toggleOn
+}
+
+@enduml

@@ -1,0 +1,4 @@
+Class-Path: batik-rasterizer.jar vizjs.jar j2v8_win32_x86_64-4.5.0.jar j2v8_linux_x86_64-4.5.0.jar j2v8_macosx_x86_64-4.5.0.jar
+Main-Class: net.sourceforge.plantuml.Run
+SplashScreen-Image: net/sourceforge/plantuml/version/logo.png
+Implementation-Title: 8407 vscode build using visjs and batik 1.7.1 rasterizer and NullSVGConverterController

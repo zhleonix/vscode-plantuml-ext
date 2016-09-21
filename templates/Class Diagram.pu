@@ -1,0 +1,38 @@
+@startuml
+hide fields
+hide empty methods
+
+abstract class AbstractCommand {
+    +void activate()
+    +void deactivate()
+
+    #void _setupExecutionContext()
+    #void _registerCommand()
+    #void _registerListeners()
+}
+
+abstract class AbstractExtension {
+    +void activate()
+    +void deactivate()
+
+    {abstract} #_prepareCommands()
+}
+
+AbstractExtension *-> "1..*" AbstractCommand
+
+AbstractExtension <|-- AmigoModeler
+
+AbstractCommand <|-- Preview
+AbstractCommand <|-- ToggleLivePreview
+AbstractCommand <|-- Export
+AbstractCommand <|-- Template
+
+AmigoModeler *--> "_previewer" Preview
+AmigoModeler *--> "_toggler" ToggleLivePreview
+AmigoModeler *--> "_exporter" Export
+AmigoModeler *--> "_templater" Template
+
+Preview - ToggleLivePreview
+
+caption Figure Amigo Modeler class diagram
+@enduml

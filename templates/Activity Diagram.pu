@@ -1,0 +1,25 @@
+@startuml
+|user|
+start
+:request PlantUML preview;
+|vscode|
+fork
+:open preview pane;
+fork again
+:prepare & check syntax;
+if (is valid artifact?) then (yes)
+  fork
+    :spawn Java command;
+    :prepare stdin;
+  fork again
+    :append stdout to SVG;
+  endfork
+else (no)
+  :report error;
+endif
+endfork
+:display SVG;
+|user|
+:view graphic image;
+end
+@enduml

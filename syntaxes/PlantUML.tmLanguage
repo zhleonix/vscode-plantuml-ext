@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>pu</string>
+		<string>plantuml</string>
+		<string>iuml</string>
+		<string>puml</string>
+	</array>
+
+	<key>name</key>
+	<string>PlantUML</string>
+	
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>match</key>
+			<string>(?:^\s*)(@startuml|@enduml)\b</string>
+			<key>name</key>
+			<string>keyword.control.plantuml</string>
+		</dict>
+
+<!--		<dict>
+			<key>match</key>
+			<string>:[^;]*$</string>
+			<key>name</key>
+			<string>string.quoted.inline.plantuml</string>
+		</dict>
+-->
+		<dict>
+			<key>begin</key>
+			<string>"</string>
+			<key>end</key>
+			<string>"</string>
+			<key>name</key>
+			<string>string.quoted.double.plantuml</string>
+		</dict>
+
+		<dict>
+			<key>match</key>
+			<string>(?:^|\s?)(o|x|\*)?(&lt;{0,2}\|?|&gt;)?(-|\.)+(&lt;|\|?&gt;{0,2})?(o|x|\*)?\s?</string>
+			<key>name</key>
+			<string>keyword.control.relationship.plantuml</string>
+		</dict>
+		
+		<dict>
+			<key>match</key>
+			<string>&lt;&lt;[\s\w]*&gt;&gt;</string>
+			<key>name</key>
+			<string>keyword.stereotype.plantuml</string>
+		</dict>
+
+		<dict>
+			<key>match</key>
+			<string>(\[([^\]]+)\]|\(([^\)]+)\)|\|([^\|]+)\||:([^:]+):|:([^;]+|\n*);|&lt;([^&gt;]+)&gt;|\[|\]|!|~|-|#|\+|{|})</string>
+			<key>name</key>
+			<string>variable.symbols.reference.plantuml</string>
+		</dict>
+		
+		<dict>
+			<key>match</key>
+			<string>(?:^\s*)==([\s\w]*==)?</string>
+			<key>name</key>
+			<string>keyword.control.divider.plantuml</string>
+		</dict>
+
+		<dict>
+			<key>match</key>
+			<string>(?:^\s*)(floating\s)?note\s((left|right|top|bottom|over)\s(of|on link)?)?</string>
+			<key>name</key>
+			<string>keyword.other.notes.plantuml</string>
+		</dict>
+
+		<dict>
+			<key>match</key>
+			<string>\b(abstract(\sclass)?|as|then|static)\b</string>
+			<key>name</key>
+			<string>keyword.other.plantuml</string>
+		</dict>
+
+		<dict>
+			<key>match</key>
+			<string>(?:^\s*)(activate|alt|as|autonumber|box|break|caption|create|critical|deactivate|!define|!definelong|destroy|detach|else|elseif|!else|end(\s)?(box|footer|fork|header|note|ref|title)?|!end if|!enddefine|!enddefinelong|endif|endlegend|endwhile|footer|fork(\sagain)?|group|header|hide\s(footbox)?|if|!ifdef|!ifndef|!include|!includeurl|legend(\s)?(left|right|center)?|loop|namespace|newpage|opt|par|ref|repeat|salt|scale|show|skinparam|sprite|title|top to bottom direction|left to right direction|!undef|while)\b</string>
+			<key>name</key>
+			<string>keyword.other.plantuml</string>
+		</dict>
+
+		<dict>
+			<key>match</key>
+			<string>(?:^\s*)((?i)actor|agent|annotation|artifact|boundary|class|cloud|component|control|database|entity|enum|folder|frame|interface|node|object|package|participant|partition|rectangle|start|state|stop|storage|usecase)\b</string>
+			<key>name</key>
+			<string>support.type.plantuml</string>
+		</dict>
+
+		<dict>
+			<key>match</key>
+			<string>(#[a-fA-F0-9]{6})</string>
+			<key>name</key>
+			<string>constant.numeric.hexcolors.plantuml</string>
+		</dict>
+
+		<dict>
+			<key>match</key>
+			<string>(').*$\n?</string>
+			<key>name</key>
+			<string>comment.line.plantuml</string>
+		</dict>
+
+		<dict>
+			<key>begin</key>
+			<string>/'</string>
+			<key>end</key>
+			<string>'/</string>
+			<key>name</key>
+			<string>comment.block.plantuml</string>
+		</dict>
+
+	</array>
+	<key>scopeName</key>
+	<string>source.plantuml</string>
+	<key>semanticClass</key>
+	<string>text.plantuml</string>
+	<key>uuid</key>
+	<string>5BBD9E42-8501-4264-B7D6-BFE10C57AD9F</string>
+</dict>
+</plist>
