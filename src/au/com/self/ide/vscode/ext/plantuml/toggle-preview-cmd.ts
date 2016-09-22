@@ -23,7 +23,7 @@ export class ToggleLivePreview extends AbstractCommand {
   protected _registerCommand() {
     this._registerCmd(ToggleLivePreview.NAME, () => {
       this._paused = !this._paused;
-      vscode.window.showInformationMessage(`PlantUML live preview is now turned: ${this._paused? 'OFF': 'ON'}`);
+      this.showToastMessage(`PlantUML live preview is now turned: ${this._paused? 'OFF': 'ON'}`);
       if (!this._paused)
         this._preview.forceRefresh();
     });

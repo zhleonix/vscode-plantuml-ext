@@ -49,6 +49,7 @@ import {Preview} from './preview-cmd';
 import {ToggleLivePreview} from './toggle-preview-cmd';
 import {Template} from './template-cmd';
 import {AbstractRenderer} from './renderer';
+import {AddVizJsSupport} from './add-vizjs-support-cmd';
 
 let __ext = null;
 
@@ -68,6 +69,7 @@ export class AmigoModeler extends AbstractExtension {
     private _previewer: Preview;
     private _templater: Template;
     private _previewToggler: ToggleLivePreview;
+    private _vizJsSupportAgent: AddVizJsSupport;
 
     protected _prepareCommands() {
         this._exporter = new Export(this);
@@ -76,5 +78,6 @@ export class AmigoModeler extends AbstractExtension {
         this._previewToggler = new ToggleLivePreview(this);
         this._previewer._previewToggler = this._previewToggler; 
         this._previewToggler._preview = this._previewer;
+        this._vizJsSupportAgent = new AddVizJsSupport(this);
     }
 }

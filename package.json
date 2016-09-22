@@ -19,7 +19,8 @@
         "onCommand:plantuml.preview",
         "onCommand:plantuml.export",
         "onCommand:plantuml.importTemplate",
-        "onCommand:plantuml.toggleLivePreview"
+        "onCommand:plantuml.toggleLivePreview",
+        "onCommand:plantuml.addVizJsSupport"
     ],
     "icon": "images/icon.png",
     "main": "./out/src/au/com/self/ide/vscode/ext/plantuml/amigo-ext",
@@ -86,6 +87,11 @@
                 "command": "plantuml.toggleLivePreview",
                 "title": "Toggle PlantUML Live Preview",
                 "description": "Turns on/off live previewing whilst editing such that the modeler is not distracted with syntax errors & repeated updates"
+            },
+            {
+                "command": "plantuml.addVizJsSupport",
+                "title": "Add PlantUML VizJS Support",
+                "description": "Due to the 20mb VSCode extension limit, the required VizJS support files must be added to the extension's library folder post marketplace install. Use this command to download any missing support files and restart when prompted"
             }
         ],
         "configuration": {

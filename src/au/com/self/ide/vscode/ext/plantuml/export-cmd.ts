@@ -15,7 +15,7 @@ export class Export extends AbstractCommand {
   private _renderer: ExportRenderer;
 
   protected _setupExecutionContext() {
-    this._renderer = new ExportRenderer();
+    this._renderer = new ExportRenderer(this);
   }
 
   protected _registerCommand() {
@@ -36,10 +36,13 @@ export class Export extends AbstractCommand {
       this._renderer.render({ format: OutputFmt[selection.label] });
     });
   }
-
 }
 
 class ExportRenderer extends AbstractRenderer {
+  constructor(private _exporter: Export) {
+    super();
+  }
+
   protected _handleInvalidSyntax(attr: IRenderingContext) {
     vscode.window.showErrorMessage(`Invalid content for Plant UML export`);
   }
@@ -61,7 +64,7 @@ class ExportRenderer extends AbstractRenderer {
     plantJar.stdout.on('close', (close) => {
       fos.end();
       fos.close();
-      vscode.window.showInformationMessage("PlantUML Export completed!");
+      this._exporter.showToastMessage("PlantUML Export completed!");
     });
     return null;
   }
