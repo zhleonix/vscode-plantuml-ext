@@ -2,7 +2,7 @@
     "name": "plant-uml-ext",
     "displayName": "Amigo PlantUML Modeler",
     "description": "Supports preview, export, templates, snippets & syntax highlighting of PlantUML",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "publisher": "self-technologies",
     "engines": {
         "vscode": "^1.0.0"
@@ -20,7 +20,7 @@
         "onCommand:plantuml.export",
         "onCommand:plantuml.importTemplate",
         "onCommand:plantuml.toggleLivePreview",
-        "onCommand:plantuml.addVizJsSupport"
+        "onCommand:plantuml.installSupportSoftware"
     ],
     "icon": "images/icon.png",
     "main": "./out/src/au/com/self/ide/vscode/ext/plantuml/amigo-ext",
@@ -89,9 +89,9 @@
                 "description": "Turns on/off live previewing whilst editing such that the modeler is not distracted with syntax errors & repeated updates"
             },
             {
-                "command": "plantuml.addVizJsSupport",
-                "title": "Add PlantUML VizJS Support",
-                "description": "Due to the 20mb VSCode extension limit, the required VizJS support files must be added to the extension's library folder post marketplace install. Use this command to download any missing support files and restart when prompted"
+                "command": "plantuml.installSupportSoftware",
+                "title": "Install PlantUML Support Software",
+                "description": "Due to the 20mb VSCode extension limit, the required PlantUML support software must be installed to the extension's library folder post marketplace install. Use this command to download and install any missing support software and restart when prompted"
             }
         ],
         "configuration": {

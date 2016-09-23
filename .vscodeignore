@@ -5,8 +5,7 @@ images/previews/**
 test/**
 java/**
 src/**
-bin/j2v8_**
-bin/vizjs.jar
+bin/**/*.jar
 **/*.map
 .gitignore
 tsconfig.json

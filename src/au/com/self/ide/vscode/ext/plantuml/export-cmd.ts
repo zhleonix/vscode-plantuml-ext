@@ -66,6 +66,9 @@ class ExportRenderer extends AbstractRenderer {
       fos.close();
       this._exporter.showToastMessage("PlantUML Export completed!");
     });
+    plantJar.stderr.on('data', (data) => {
+      vscode.window.showErrorMessage(data);
+    });
     return null;
   }
 }

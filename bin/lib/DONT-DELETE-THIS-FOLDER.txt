@@ -1,0 +1,26 @@
+Do not delete this folder! 
+The "Install PlantUML Support Software" command will download and install Batik support library files into this folder.
+
+You should expect to see the following library files in this folder for PDF export to function properly.
+
+batik-anim.jar
+batik-awt-util.jar
+batik-bridge.jar
+batik-codec.jar
+batik-css.jar
+batik-dom.jar
+batik-ext.jar
+batik-gvt.jar
+batik-parser.jar
+batik-script.jar
+batik-svg-dom.jar
+batik-transcoder.jar
+batik-util.jar
+batik-xml.jar
+js.jar
+PDF-Support-README.md
+pdf-transcoder.jar
+xalan-2.6.0.jar
+xerces_2_5_0.jar
+xml-apis-ext.jar
+xml-apis.jar

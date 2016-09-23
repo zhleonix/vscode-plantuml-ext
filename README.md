@@ -36,25 +36,38 @@ The previous release of this extension had the following external dependencies:
 2. PlantUML.jar
 3. GRAPHIC VIZ
 
-**This release attempts to reduce the barriers to entry by packaging together the dependent software distributions.** Currently, the only external dependency is JAVA. Note, VizJS should be installed via the Command Palette immediately post installation of this extention (refer to section 'PlantUML VisJS Support' below).
+**This release attempts to reduce the barriers to entry by packaging together the dependent software distributions.** Currently, the only external dependency is JAVA. However, you must side load all the other dependent software by invoking the "Install PlantUML Support Software" Command from the the Command Palette immediately after install.
 
-I genuinely tried to eliminate all dependencies to enable this extension to work right out of the box. I just spent the last one week attempting to native compile (ie. Way Ahead Of Time as opposed to JIT) plantuml.jar into a native terminal app for Win/Linux/Mac. Unfortunately, PlantUML's use of AWT put an end to those aspirations. Without the ability to native compile plantuml.jar, with limited capacity to use ProGuard to eliminate dead code due to the heavy use of reflection; I am left with the heavy Java footprint sizes. This wouldn't be such an issue of Microsoft VSCode marketplace remove their 20mb extension size restriction.
+For the last 2 days the "vsce publish" command (ie. tool used to publish extensions) has prevented me from publishing the extention to the Microsoft VSCode marketplace. The visx file (ie. extension install file) once included all dependent software and was 28mb in size. After much repeated failed publishing attempts with various pre-installed software configurations, I have decided to remove all the pre-installed support software and request the user to install them post extention install via a new built in command.
+
+I genuinely tried to eliminate all dependencies to enable this extension to work right out of the box with a minimal footprint. I spent one week attempting to native compile (ie. Way Ahead Of Time as opposed to JIT) plantuml.jar into a native terminal app for Win/Linux/Mac. Unfortunately, PlantUML's use of AWT put an end to those aspirations. Without the ability to native compile plantuml.jar, with limited capacity to use ProGuard to eliminate dead code due to the heavy use of reflection API; I am left with the heavy Java footprint sizes. This wouldn't be such an issue if Microsoft VSCode marketplace removes their 20mb extension size restriction and other publishing timeout related problems.
 
 This release of the extension bundles the following software:
-1. plantuml-VSCode-8407.jar
+1. plantuml-vscode-8407.jar
+
 Note, this is custom build of plantuml.jar! I have modified PdfConverter.java by using NullSVGConverterController.java (refer source) in order to stop Batik from emitting warning messages to standard output whilst doing a PDF export. I also modified the manifest file which is used to package the jar together. The modified manifest makes the correct references to batik and the latest jsv8 binaries.
 
 2. Batik
-PlantUML uses Batik's rasterizer for the purposes of generating a PDF. Batik 1.7 is the only version that I could get to work. The newer Batik 1.8 release is plagued with missing dependencies.
+
+PlantUML uses Batik's rasterizer for the purposes of generating a PDF. Batik 1.7.1 is the most recent version that I could get to work. The newer Batik 1.8 release is plagued with missing dependencies.
 
 3. VizJS & J2V8 
+
 VizJS is a javascript implementation of GraphViz created via Emscripten and fronted by a Java class. J2V8 is then used to run the javascript implementation from Java. VizJS is a plantuml sub-project, and whilst I have included it in the bundle I have personally found it a little temperamental on Windows. Hence, if you encounter any VizJS related rendering issues, I recommend that you set up a GRAPHVIZ_DOT environment variable as in the previous release (refer Extension Settings section below). 
 Note, VizJS must be side loaded into the extension due to Microsoft marketplace extension size limitations (see details below). That is, immediately after you install the extension and restart VSCode, run the Add PlantUML VizJS Support from the Command Palette to conclude the installation process.
 
-Having said that, all you need to do now is set JAVA_HOME either as a user setting in VSCode or as an environmental variable. Keep in mind some developers (like myself) have many JDK's installed. In such instances, I wanted to be able to specify which JDK distribution to use and not be stuck with the one set in the environmental variable.
+So why all this complication around the tool chain? Well, a raft of problems emanate when software is distributed without it's dependent packages, which is the case with plantuml.jar. Therefore, to avoid such problems the Install PlantUML Support Software command will download and install the entire tool chain for you. 
+
+Having said that, all you need to do now is:
+1. set JAVA_HOME 
+2. Install PlantUML Support Software
+
+Note, JAVA_HOME can be set either as a user setting in VSCode or as an environmental variable. Keep in mind some developers (like myself) have many JDK's installed. In such instances, I wanted to be able to specify which JDK distribution to use and not be stuck with the one set in the environmental variable.
 
 ![Configuration](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/java_home-config.png?raw=true)
 
+
+![Post Installation](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/post-installation.png?raw=true)
 
 - - -
 ## Features
@@ -71,7 +84,7 @@ These use-cases are generally mapped to the following feature list enumerated be
 - Toggle Pause Live Preview 
 - Export PlantUML document
 - Import content from PlantUML template
-- Add PlantUML VizJS Support
+- Install PlantUML Support Software [non-functional requirement]
 
 
 ### PlantUML languageid definition for VSCode
@@ -225,16 +238,26 @@ Launch via:
 ![Import Template](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/template.png?raw=true)
 
 
-### Add PlantUML VisJS Support
+### Install PlantUML Support Software
 
-Note, Microsoft imposes a 20MB limit on the size of vsix files (ie. extension installers) which are hosted in the marketplace. This restriction has caused a conflict on how the Amigo PlantUML extension is published to the marketplace, the initial deployment after install and the post installation configurations. 
+Note, Microsoft imposes a 20mb limit on the size of vsix files (ie. extension installers) which are hosted in the marketplace. Note, this appears to be a theoretical constraint as I still was unable to publish vsix files which were 10mb in size.
 
-As such, a design decision has been made to defer the download of the VizJS library files which act as light weight alternative to the previously used native GraphicViz installation. For users who have already installed a native GraphicViz binary, this is not an issue and you can by-pass this step. However, for those other users that have a clean install, you may wish to invoke this command prior to attempting to use any of the preview/export features.
+This restriction has caused a conflict on how the Amigo PlantUML extension is tested in development mode, installed locally via the command line, published to the marketplace, and the post-installation deployment configuration. 
 
-You can read more about this non-functional requirement from the [README file](bin/VizJS-Support-README.md).
+As such, a design decision has been made to defer the download of all support software. This command will install the downloaded software to the following location:
+
+```
+<%USERPROFILE%|$USER>/.vscode/extensions/self-technologies.plant-uml-ext-<x.y.z>/bin
+```
+Please use this command immediately after installing the extension.
+
+**Note**
+For those users who already have a native GraphViz binary installed you just need to ensure that the GRAPHVIZ\_DOT environmental variable remains set. PlantUML gives precedence to GRAPHVIZ\_DOT over VizJS/JDot installations, therefore installing VizJS will not present any problems. 
+
+You can read more about this non-functional requirement from the [README file](bin/Software-Support-README.md).
 
 Launch via:
-- Menu: View > Command Palette > Add PlantUML VizJS Support
+- Menu: View > Command Palette > Install PlantUML Support Software
 
 
 - - -
@@ -260,7 +283,8 @@ Launch via:
 
 - - -
 ## Final Release Notice
-- I developed this VSCode extension for a purpose, and that purpose has now been achieved. I am at a point in my life were I am practicing dispassion over passion, unfettered over fettered, shedding over accumulating, modesty over self-agrandisation, contentment over discontentment, persistence over laziness, seclusion over entanglement, and unburdensome over burdensome.
+
+I developed this VSCode extension for a purpose, and that purpose has now been achieved. I am at a point in my life were I am practicing dispassion over passion, unfettered over fettered, shedding over accumulating, modesty over self-agrandisation, contentment over discontentment, persistence over laziness, seclusion over entanglement, and unburdensome over burdensome.
 
 As such, it is time for me to _let go_ of this VSCode extension. I offer it in totality to whom ever wants to claim it without attribution, without acknowledgements; just take it, make it yours; and if it interests you, collaborate with the PlantUML team on improving the overall platform. As soon as you have taken ownership of this extension, [post an issue](https://github.com/ashinw/vscode-plantuml-ext/issues) stating claim and I will immediately unpublish this extension and delete the repository from github.
 
@@ -273,14 +297,14 @@ As such, it is time for me to _let go_ of this VSCode extension. I offer it in t
 - - -
 ## Release Notes
 
-### 0.1.0
+### 1.0.0
 - Added an quick selection export menu (ie. GUI) to avoid Command Palette PlantUML export format pollution
 - Added support for PlantUML preview for selected text within any text document. This is handy for developers who want to preview UML embedded in code comments.
 - Added edit buffer settlement delay before preview refresh
 - Added toggle pause live preview command
 - Added template support with common UML artifacts
 - Added binaries to ensure that PDF and other features work out of box
-- Add PlantUML VizJS Support to download an alternative GraphicViz installation
+- Added Install PlantUML Support Software to avoid MS marketplace publishing related issues
 
 
 ### 0.0.1
