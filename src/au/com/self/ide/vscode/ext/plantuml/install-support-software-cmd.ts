@@ -12,7 +12,7 @@ import {AbstractCommand} from '../command';
 export class InstallSupportSoftware extends AbstractCommand {
   public static NAME: string = "plantuml.installSupportSoftware";
 
-  private static _SUPPORT_SW_URL = "https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/master/bin/";
+  private static _SUPPORT_SW_URL = "https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/r1.0.0/bin/";
   private static _BIN_DIR = "/bin/";
   private static _BIN_LIB_DIR = "lib/";
 
