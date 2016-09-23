@@ -9,7 +9,7 @@
     },
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ashinw/vscode-plantuml-ext"
+		"url": "https://github.com/zhleonix/vscode-plantuml-ext"
 	},    
     "categories": [
         "Other"

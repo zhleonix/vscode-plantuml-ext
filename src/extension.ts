@@ -52,13 +52,9 @@ module au_com_self_ide_vscode_ext_plantuml {
         }
 
         private _prepareEditorListerners() {
-            vscode.workspace.onDidChangeTextDocument((e: vscode.TextDocumentChangeEvent) => {
-                if (e.document === vscode.window.activeTextEditor.document)
+            vscode.workspace.onDidSaveTextDocument((e: vscode.TextDocument) => {
+                if( e === vscode.window.activeTextEditor.document)
                     this._provider.update(Extension._PREVIEW_URI);
-            });
-
-            vscode.window.onDidChangeActiveTextEditor((e: vscode.TextEditor) => {
-                this._provider.update(Extension._PREVIEW_URI);
             });
         }
 
@@ -122,7 +118,7 @@ module au_com_self_ide_vscode_ext_plantuml {
         public render(): Thenable<string> {
             let ret: Thenable<string> = null;
             this._editor = vscode.window.activeTextEditor;
-            if (this._editor.document.languageId === "plaintext") {
+            if (this._editor.document.languageId === "plaintext" || this._editor.document.languageId === "plantuml") {
                 this._buff = this._editor.document.getText().trim();
                 try {
                     if (this._checkBasicSyntax(this._buff)) {
