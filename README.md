@@ -64,16 +64,15 @@ Having said that, all you need to do now is:
 
 Note, JAVA_HOME can be set either as a user setting in VSCode or as an environmental variable. Keep in mind some developers (like myself) have many JDK's installed. In such instances, I wanted to be able to specify which JDK distribution to use and not be stuck with the one set in the environmental variable.
 
-![Configuration](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/java_home-config.png?raw=true)
+![Configuration](https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/r1.0.0/images/previews/java_home-config.png)
 
 
-![Post Installation](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/post-installation.png?raw=true)
-
+![Post Installation](https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/r1.0.0/images/previews/post-installation.png)
 - - -
 ## Features
 This Amigo PlantUML extension attempts to address the concerns of the two primary stakeholders illustrated in the use-case diagram below.  
 
-![PlantUML VSCode extension Use-case model](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/use-case-model.png?raw=true)
+![PlantUML VSCode extension Use-case model](https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/r1.0.0/images/previews/use-case-model.png)
 
 These use-cases are generally mapped to the following feature list enumerated below:
 
@@ -105,7 +104,7 @@ An editor can only provide limited support whilst the definition of the document
 
 However, any file can temporarily apply the plantuml languageid by nominating it via VSCode's language selector (ie. bottom right in UI). For example, when creating new files (ie. no file extension) you may choose to nominate the language via the selector and immediately start benefiting from syntax highlighting and snippets.
 
-![Using Languageid](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/setting-langid.png?raw=true)
+![Using Languageid](https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/r1.0.0/images/previews/setting-langid.png)
 
 
 ### 100+ PlantUML snippets 
@@ -145,7 +144,7 @@ Launch via:
 - Short cut: Ctrl+p Ctrl+v
 - Menu: View > Command Palette > Open PlantUML Preview
 
-![Preview diagram](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/preview.png?raw=true)
+![Preview diagram](https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/r1.0.0/images/previews/preview.png)
 
 
 ### Selected Text Preview 
@@ -156,7 +155,7 @@ Launch via:
 - Short cut: Ctrl+p Ctrl+v
 - Menu: View > Command Palette > Open PlantUML Preview
 
-![Preview Selected Diagram](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/preview-selection.png?raw=true)
+![Preview Selected Diagram](https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/r1.0.0/images/previews/preview-selection.png)
 
 
 ### Toggle Pause Live Preview 
@@ -168,7 +167,7 @@ Launch via:
 - Menu: View > Command Palette > Toggle PlantUML Live Preview
 
 
-![Toggle Pause Live Preview](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/preview-toggle.png?raw=true)
+![Toggle Pause Live Preview](https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/r1.0.0/images/previews/preview-toggle.png)
 
 
 ### Export PlantUML document
@@ -211,7 +210,7 @@ Launch via:
 - Menu: View > Command Palette > Export PlantUML text...
 
 
-![Export Document](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/export.png?raw=true)
+![Export Document](https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/r1.0.0/images/previews/export.png)
 
 
 ### Import content from PlantUML template
@@ -235,7 +234,7 @@ Please either edit the above templates and/or add your own templates to this fol
 Launch via:
 - Menu: View > Command Palette > Import PlantUML template...
 
-![Import Template](https://github.com/ashinw/vscode-plantuml-ext/blob/master/images/previews/template.png?raw=true)
+![Import Template](https://raw.githubusercontent.com/ashinw/vscode-plantuml-ext/r1.0.0/images/previews/template.png)
 
 
 ### Install PlantUML Support Software
