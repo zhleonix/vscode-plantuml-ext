@@ -151,21 +151,10 @@ module au_com_self_ide_vscode_ext_plantuml {
             return ret;
         }
 
-        private _prepareCmdArgs(): PreparedArgs {
-            let ret = {
-                opts: null,
-                outputFile: null,
-                fileExt: null
-            };
-            if (this.preview)
-                ret.opts = Renderer._BASE_OPTS.concat("-tsvg");
-            else {
-                let format = OutputFmt[this.exportFmt].toLowerCase();
-                ret.opts = Renderer._BASE_OPTS.concat("-t" + format);
-                ret.fileExt = format;
-                let fsPath = this._editor.document.uri.fsPath;
-                let dirName = path.dirname(fsPath);
-                if (dirName === ".") {
+        private _getWorkingPath(): string[] {
+            let fsPath = this._editor.document.uri.fsPath;
+            let dirName = path.dirname(fsPath);
+            if (dirName === ".") {
                     dirName = vscode.workspace.rootPath;
                     if (dirName === undefined) {
                         dirName = process.env['HOME'];
@@ -173,7 +162,25 @@ module au_com_self_ide_vscode_ext_plantuml {
                             dirName = process.env['USERPROFILE'];
                     }
                     fsPath = dirName + "/" + fsPath;
-                }
+            }
+            return [dirName,fsPath];
+        }
+
+        private _prepareCmdArgs(): PreparedArgs {
+            let ret = {
+                opts: null,
+                outputFile: null,
+                fileExt: null
+            };
+            let [dirName,fsPath] = this._getWorkingPath();
+            let plantumlOpts = ["-Dplantuml.include.path=\""+dirName+"\""];
+            if (this.preview)
+                ret.opts = plantumlOpts.concat(Renderer._BASE_OPTS).concat("-tsvg");
+            else {
+                let format = OutputFmt[this.exportFmt].toLowerCase();
+                ret.opts = plantumlOpts.concat(Renderer._BASE_OPTS).concat("-t" + format);
+                ret.fileExt = format;
+
                 ret.outputFile = fsPath + '.' + ret.fileExt;
                 if (this.exportFmt === OutputFmt.LATEX_NOPREAMBLE)
                     ret.fileExt = ret.fileExt.replace('_', ':');
@@ -186,6 +193,7 @@ module au_com_self_ide_vscode_ext_plantuml {
             if (this._buff.trim().length === 0)
                 return null;
             let plantJar = child_process.spawn(Renderer._JAVA_EXE, args.opts);
+            console.log(args.opts);
             plantJar.stdin.write(this._buff);
             plantJar.stdin.end();
             let ret: Thenable<string> = null;
